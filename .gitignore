@@ -1,0 +1,6 @@
+node_modules
+dist
+*.log
+.DS_Store
+# prototipos de diseño (referencia local, no se publican)
+concepts/
