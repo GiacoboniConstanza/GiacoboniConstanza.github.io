@@ -45,7 +45,7 @@ Como es un repo de usuario (`<usuario>.github.io`), el sitio se sirve en la raí
 | Textos ES/EN (perfil, stack, experiencia, casos, proyectos, formación, idiomas, contacto) | `src/content.ts` |
 | Hero: secuencia del terminal y diagrama del pipeline | `src/script.ts`, `src/Hero.tsx`, `src/Pipeline.tsx` |
 | Secciones, header y footer | `src/App.tsx` |
-| Temas (Turquesa / Terminal / Patagonia) y estilos | `src/index.css` |
+| Paleta (turquesa) y estilos | `src/index.css` |
 | Meta tags, Open Graph, JSON-LD | `index.html` |
 | Imagen para redes (1200×630) | `public/og-image.png` |
 | CV descargables (versión web, sin teléfono ni ubicación) | `public/CV_Constanza_Giacoboni_ES_web.pdf`, `public/CV_Constanza_Giacoboni_EN_web.pdf` |
@@ -60,7 +60,7 @@ y luego se copian a `public/` con el mismo nombre.
 
 ## Comandos del terminal del hero
 
-`help`, `whoami`, `stack`, `contact`, `cv`, `replay`, `clear`, `theme <turquesa|terminal|patagonia>`, `lang <es|en>`. Botones: saltar animación y repetir.
+`help`, `whoami`, `stack`, `contact`, `cv`, `replay`, `clear`, `lang <es|en>`. Botones: saltar animación y repetir.
 
 ## Notas
 

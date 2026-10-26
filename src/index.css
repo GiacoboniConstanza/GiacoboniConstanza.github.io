@@ -17,9 +17,7 @@ body { @apply bg-ink text-slate-300 font-sans antialiased; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
-:root, [data-theme="turquesa"] { --acc: #22b8a6; --acc2: #8fd8ce; --acc-deep: #0f5e6b; --bg: #070c14; --ok: #34d399; }
-[data-theme="terminal"] { --acc: #39ff88; --acc2: #b8f5c8; --acc-deep: #0f5a2c; --bg: #040704; --ok: #39ff88; }
-[data-theme="patagonia"] { --acc: #f4a259; --acc2: #fcd9b0; --acc-deep: #7a3f12; --bg: #0b1626; --ok: #7dd3a8; }
+:root { --acc: #22b8a6; --acc2: #8fd8ce; --acc-deep: #0f5e6b; --bg: #070c14; --ok: #34d399; }
 body { background: var(--bg); transition: background-color .4s; }
 .acc { color: var(--acc); } .acc2 { color: var(--acc2); }
 .bg-acc { background: var(--acc); }

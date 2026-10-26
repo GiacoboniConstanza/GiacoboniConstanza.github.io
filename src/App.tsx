@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { CV_FILES, LINKS, NAME, T, type Lang } from './content'
-import { Hero, THEMES, type ThemeId } from './Hero'
+import { Hero } from './Hero'
 import { useInView, useLang } from './hooks'
 
 const SEC = ['profile', 'stack', 'experience', 'cases', 'projects', 'education', 'contact'] as const
@@ -9,8 +9,6 @@ const IDS: Record<(typeof SEC)[number], string> = { profile: 'perfil', stack: 's
 export default function App() {
   const [lang, setLang] = useLang()
   const t = T[lang]
-  const [theme, setTheme] = useState<ThemeId>(() => (document.documentElement.dataset.theme as ThemeId) || 'turquesa')
-  useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('cg-theme', theme) } catch { /* sin storage */ } }, [theme])
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => { const f = () => setScrolled(scrollY > 8); f(); addEventListener('scroll', f, { passive: true }); return () => removeEventListener('scroll', f) }, [])
 
@@ -24,14 +22,6 @@ export default function App() {
             {SEC.filter((k) => k !== 'education').map((k) => <a key={k} href={`#${IDS[k]}`} className="transition hover:text-white">/{t.nav[k]}</a>)}
           </nav>
           <div className="ml-auto flex items-center gap-3">
-            <div role="radiogroup" aria-label={lang === 'es' ? 'Tema de color' : 'Color theme'} className="flex items-center gap-1 rounded-full border border-[#1c2836] bg-[#0b121c] p-1">
-              {THEMES.map((th) => (
-                <button key={th.id} type="button" role="radio" aria-checked={theme === th.id} onClick={() => setTheme(th.id)} title={th.name}
-                  className={`flex items-center gap-1.5 rounded-full px-2 py-1 font-mono text-[11px] transition focus-visible:outline-2 focus-visible:outline-[var(--acc)] ${theme === th.id ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-slate-300'}`}>
-                  <span aria-hidden="true" className="size-2.5 rounded-full" style={{ background: th.sw }} /><span className="hidden xl:inline">{th.name}</span><span className="sr-only xl:hidden">{th.name}</span>
-                </button>
-              ))}
-            </div>
             <button type="button" onClick={() => setLang(lang === 'es' ? 'en' : 'es')} aria-label={lang === 'es' ? 'View in English' : 'Ver en español'}
               className="rounded-full border border-[#1c2836] bg-[#0b121c] px-3 py-1.5 font-mono text-[11px] uppercase text-slate-300 transition hover:text-white focus-visible:outline-2 focus-visible:outline-[var(--acc)]">{lang === 'es' ? 'en' : 'es'}</button>
           </div>
@@ -39,7 +29,7 @@ export default function App() {
       </header>
 
       <main id="main">
-        <Hero lang={lang} setLang={setLang} setTheme={setTheme} />
+        <Hero lang={lang} setLang={setLang} />
         <div className="mx-auto max-w-6xl px-5">
           <Profile lang={lang} />
           <Stack lang={lang} />

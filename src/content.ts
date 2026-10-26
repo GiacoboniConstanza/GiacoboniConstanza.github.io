@@ -45,7 +45,6 @@ const es = {
     ['clientes', '+20 con soporte y desarrollo'],
     ['tests', '+300 en una de las suites'],
     ['crm', '~3000 usuarios'],
-    ['pasantes', '2 (1 en planta permanente)'],
   ],
   stackTitle: 'stack',
   stack: [
@@ -163,7 +162,6 @@ const en: Copy = {
     ['clients', '20+ supported'],
     ['tests', '300+ in one of the suites'],
     ['crm', '~3,000 users'],
-    ['interns', '2 (1 hired permanently)'],
   ],
   stackTitle: 'stack',
   stack: [

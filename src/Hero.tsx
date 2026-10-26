@@ -11,22 +11,16 @@ type Line =
   | { id: number; k: 'pipe'; stage: StageId; label: string; jobs: string }
 
 const IDLE: Record<StageId, Status> = { branch: 'idle', mr: 'idle', lint: 'idle', analyze: 'idle', test: 'idle', build: 'idle', deploy: 'idle', prod: 'idle' }
-export const THEMES = [
-  { id: 'turquesa', name: 'Turquesa', sw: '#22b8a6' },
-  { id: 'terminal', name: 'Terminal', sw: '#39ff88' },
-  { id: 'patagonia', name: 'Patagonia', sw: '#f4a259' },
-] as const
-export type ThemeId = (typeof THEMES)[number]['id']
 
 const UI = {
-  es: { waiting: 'esperando deploy…', replay: 'repetir', skip: 'saltar', help: 'Comandos: whoami · stack · contact · cv · replay · lang en|es · theme turquesa|terminal|patagonia · clear', nf: 'comando no encontrado', hint: 'escribir un comando o "help"', themes: 'Tema de color', sections: 'Secciones', term: 'Terminal: flujo de trabajo git y pipeline de CI/CD', cmd: 'Comando', profile: 'perfil', highlights: 'casos_destacados', ill: '// flujo ilustrativo basado en el trabajo diario: GitLab, merge requests y CI/CD' },
-  en: { waiting: 'waiting for deploy…', replay: 'replay', skip: 'skip', help: 'Commands: whoami · stack · contact · cv · replay · lang en|es · theme turquesa|terminal|patagonia · clear', nf: 'command not found', hint: 'type a command or "help"', themes: 'Color theme', sections: 'Sections', term: 'Terminal: git workflow and CI/CD pipeline', cmd: 'Command', profile: 'profile', highlights: 'case_studies', ill: '// illustrative flow based on daily work: GitLab, merge requests and CI/CD' },
+  es: { waiting: 'esperando deploy…', replay: 'repetir', skip: 'saltar', help: 'Comandos: whoami · stack · contact · cv · replay · lang en|es · clear', nf: 'comando no encontrado', hint: 'escribir un comando o "help"', sections: 'Secciones', term: 'Terminal: flujo de trabajo git y pipeline de CI/CD', cmd: 'Comando', profile: 'perfil', highlights: 'casos_destacados', ill: '// flujo ilustrativo basado en el trabajo diario: GitLab, merge requests y CI/CD' },
+  en: { waiting: 'waiting for deploy…', replay: 'replay', skip: 'skip', help: 'Commands: whoami · stack · contact · cv · replay · lang en|es · clear', nf: 'command not found', hint: 'type a command or "help"', sections: 'Sections', term: 'Terminal: git workflow and CI/CD pipeline', cmd: 'Command', profile: 'profile', highlights: 'case_studies', ill: '// illustrative flow based on daily work: GitLab, merge requests and CI/CD' },
 }
 
 let uid = 0
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-export function Hero({ lang, setLang, setTheme }: { lang: Lang; setLang: (l: Lang) => void; setTheme: (t: ThemeId) => void }) {
+export function Hero({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const reduced = useReducedMotion()
   const t = T[lang], ui = UI[lang]
 
@@ -112,7 +106,6 @@ export function Hero({ lang, setLang, setTheme }: { lang: Lang; setLang: (l: Lan
         { id: ++uid, k: 'link', text: `es  ${CV_FILES.es.slice(1)}`, href: CV_FILES.es },
         { id: ++uid, k: 'link', text: `en  ${CV_FILES.en.slice(1)}`, href: CV_FILES.en }]; break
       case 'lang': { const n: Lang = arg === 'en' || arg === 'es' ? arg : lang === 'es' ? 'en' : 'es'; setLang(n); out = [o(`lang → ${n}`, 'ok')]; break }
-      case 'theme': { const th = THEMES.find((x) => x.id === arg || x.name.toLowerCase() === arg); if (th) { setTheme(th.id); out = [o(`theme → ${th.name}`, 'ok')] } else out = [o(THEMES.map((x) => x.id).join(' · '), 'dim')]; break }
       default: out = [o(`${ui.nf}: ${cmd}`, 'err')]
     }
     setLines((p) => [...p, echo, ...out])

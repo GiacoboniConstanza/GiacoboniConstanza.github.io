@@ -41,7 +41,12 @@ function Badge({ x, y, st, reduced }: { x: number; y: number; st: Status; reduce
   if (st === 'run') return (
     <g>
       <circle cx={x} cy={y} r="9" fill="#0b1320" stroke="#334155" />
-      <path className={reduced ? '' : 'spin'} d={`M${x} ${y - 6} a6 6 0 0 1 6 6`} fill="none" stroke="var(--acc)" strokeWidth="2" strokeLinecap="round" />
+      <circle cx={x} cy={y} r="5" fill="none" stroke="#1e293b" strokeWidth="2" />
+      {/* El grupo rota alrededor del centro del badge: su caja (fill-box) es el círculo completo, no solo el arco */}
+      <g className={reduced ? '' : 'spin'}>
+        <circle cx={x} cy={y} r="6" fill="none" stroke="none" />
+        <circle cx={x} cy={y} r="5" fill="none" stroke="var(--acc)" strokeWidth="2" strokeLinecap="round" strokeDasharray="9 22.4" transform={`rotate(-90 ${x} ${y})`} />
+      </g>
     </g>
   )
   return <circle cx={x} cy={y} r="4" fill="#1e293b" />
@@ -50,7 +55,7 @@ function Badge({ x, y, st, reduced }: { x: number; y: number; st: Status; reduce
 export function Pipeline({ st, reduced, lang }: { st: Record<StageId, Status>; reduced: boolean; lang: Lang }) {
   const prod = st.prod
   return (
-    <svg viewBox="0 0 520 392" className="h-auto w-full" role="img"
+    <svg viewBox="0 0 520 392" className="h-auto w-full overflow-visible" role="img"
       aria-label={lang === 'es' ? 'Diagrama del pipeline: rama, merge request, lint, PHPStan, PHPUnit, Docker, deploy y producción' : 'Pipeline diagram: branch, merge request, lint, PHPStan, PHPUnit, Docker, deploy and production'}>
       <defs>
         <filter id="g"><feGaussianBlur stdDeviation="2.5" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
